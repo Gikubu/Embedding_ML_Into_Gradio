@@ -54,3 +54,49 @@ def predict(*args, encoder = encoder, scaler = scaler, model = model):
     # Making the prediction
     model_output = model.predict(df_processed)
     return float(model_output[0])
+
+
+# ----- App Interface
+with gr.Blocks() as demo:
+    gr.Markdown("# Telecom Customer Churn Prediction")
+
+    # ----- Phase 1: Receiving Inputs
+    gr.Markdown("**Demographic Data**")
+    with gr.Row():
+        gender = gr.Dropdown(label="Gender", choices=["Male", "Female"])
+        SeniorCitizen = gr.Radio(label="Senior Citizen", choices=["Yes", "No"])
+        Partner = gr.Radio(label="Partner", choices=["Yes", "No"])
+        Dependents = gr.Radio(label="Dependents", choices=["Yes", "No"])
+
+    gr.Markdown("**Service Length and Charges (USD)**")
+    with gr.Row():
+        Contract = gr.Dropdown(label="Contract", choices=["Month-to-month", "One year", "Two year"])
+        tenure = gr.Slider(label="Tenure (months)", minimum=1, step=1, interactive=True)
+        MonthlyCharges = gr.Slider(label="Monthly Charges", step=0.05)
+        TotalCharges = gr.Slider(label="Total Charges", step=0.05)
+
+    # Phone Service Usage
+    gr.Markdown("**Phone Service Usage**")
+    with gr.Row():
+        PhoneService = gr.Radio(label="Phone Service", choices=["Yes", "No"])
+        MultipleLines = gr.Dropdown(label="Multiple Lines", choices=[
+                                    "Yes", "No", "No phone service"])
+
+    # Internet Service Usage
+    gr.Markdown("**Internet Service Usage**")
+    with gr.Row():
+        InternetService = gr.Dropdown(label="Internet Service", choices=["DSL", "Fiber Optic", "No"])
+        OnlineSecurity = gr.Dropdown(label="Online Security", choices=["Yes", "No", "No phone service"])
+        OnlineBackup = gr.Dropdown(label="Online Backup", choices=["Yes", "No", "No phone service"])
+        DeviceProtection = gr.Dropdown(label="Device Protection", choices=["Yes", "No", "No phone service"])
+        TechSupport = gr.Dropdown(label="Tech Support", choices=["Yes", "No", "No phone service"])
+        StreamingTV = gr.Dropdown(label="TV Streaming", choices=["Yes", "No", "No phone service"])
+        StreamingMovies = gr.Dropdown(label="Movie Streaming", choices=["Yes", "No", "No phone service"])
+
+    # Billing and Payment
+    gr.Markdown("**Billing and Payment**")
+    with gr.Row():
+        PaperlessBilling = gr.Radio(
+            label="Paperless Billing", choices=["Yes", "No"])
+        PaymentMethod = gr.Dropdown(label="Payment Method", choices=["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"])
+

@@ -19,3 +19,10 @@ def load_ml_toolkit(filepath=r"C:\Users\asus\Data_Analytics\linear_regression_mo
     with open(filepath, "rb") as file:
         loaded_toolkit = pickle.load(file)
     return loaded_toolkit
+
+
+# Importing the toolkit
+loaded_toolkit = load_ml_toolkit()
+encoder = loaded_toolkit["encoder"]
+scaler = loaded_toolkit["scaler"]
+model = loaded_toolkit["model"]

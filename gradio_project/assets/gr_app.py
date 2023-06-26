@@ -100,3 +100,14 @@ with gr.Blocks() as demo:
             label="Paperless Billing", choices=["Yes", "No"])
         PaymentMethod = gr.Dropdown(label="Payment Method", choices=["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"])
 
+
+  # Output Prediction
+    output = gr.Number(label="Prediction")
+    submit_button = gr.Button("Submit")
+    
+    submit_button.click(fn= predict,
+                        outputs= output,
+                        inputs= [gender, SeniorCitizen, Partner, Dependents, Contract, tenure, MonthlyCharges, TotalCharges, PaymentMethod, PhoneService, MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies, PaperlessBilling],
+                        )
+
+demo.launch()
